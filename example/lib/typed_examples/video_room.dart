@@ -127,7 +127,7 @@ class _VideoRoomState extends State<TypedVideoRoomV2Unified> {
     plugin.typedMessages?.listen((event) async {
       Object data = event.event.plugindata?.data;
       if (data is VideoRoomJoinedEvent) {
-        (await plugin.publishMedia(bitrate: 3000000));
+        (await plugin.publishMedia(bitrate: 512));
         List<Map<String, dynamic>> publisherStreams = [];
         for (Publishers publisher in data.publishers ?? []) {
           for (Streams stream in publisher.streams ?? []) {
@@ -267,25 +267,26 @@ class _VideoRoomState extends State<TypedVideoRoomV2Unified> {
         ),
         body: GridView.builder(
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
             itemCount:
                 remoteStreams.entries.map((e) => e.value).toList().length,
             itemBuilder: (context, index) {
               List<RemoteStream> items =
                   remoteStreams.entries.map((e) => e.value).toList();
               RemoteStream remoteStream = items[index];
+              
               return Stack(
                 children: [
                   RTCVideoView(remoteStream.audioRenderer,
                       filterQuality: FilterQuality.high,
                       objectFit:
-                          RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                      mirror: true),
+                          RTCVideoViewObjectFit.RTCVideoViewObjectFitContain,
+                      mirror: false),
                   RTCVideoView(remoteStream.videoRenderer,
                       filterQuality: FilterQuality.high,
                       objectFit:
-                          RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                      mirror: true)
+                          RTCVideoViewObjectFit.RTCVideoViewObjectFitContain,
+                      mirror: false)
                 ],
               );
             }));
