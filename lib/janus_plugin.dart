@@ -339,7 +339,7 @@ class JanusPlugin {
               candidateMap['candidate'],
               candidateMap['sdpMid'],
               candidateMap['sdpMLineIndex']);
-          webRTCHandle!.peerConnection!.addCandidate(candidate);
+          webRTCHandle?.peerConnection?.addCandidate(candidate);
         } 
   }
 

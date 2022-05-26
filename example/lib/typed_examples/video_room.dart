@@ -267,7 +267,7 @@ class _VideoRoomState extends State<TypedVideoRoomV2Unified> {
         ),
         body: GridView.builder(
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 9),
             itemCount:
                 remoteStreams.entries.map((e) => e.value).toList().length,
             itemBuilder: (context, index) {
